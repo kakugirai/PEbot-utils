@@ -1,8 +1,9 @@
 import sys
 import argparse
+import getpass
 import bot
 
-if sys.platform == "linux" or sys.platform == "linux2":
+if sys.platform == "linux":
     from pyvirtualdisplay import Display
     display = Display(visible=0, size=(800, 600))
     display.start()
@@ -31,10 +32,10 @@ elif sys.platform == "win32":
 #              namespace.password.append(values)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-u', '--username', dest='username', required=True,
-                    help="CNS username")
-parser.add_argument('-p', '--password', dest='password', required=True,
-                    help="CNS password")
+#  parser.add_argument('-u', '--username', dest='username', required=True,
+#                      help="CNS username")
+#  parser.add_argument('-p', '--password', dest='password', required=True,
+#                      help="CNS password")
 parser.add_argument("-a", "--available",
                     help="show available class")
 parser.add_argument("-r", "--reserve", dest="classname",
@@ -43,5 +44,7 @@ options = parser.parse_args()
 
 PEbot = bot.Bot()
 if options.classname:
-    print(PEbot.login(options.username, options.password))
+    username = input("CNS ID: ")
+    password = getpass.getpass("CNS Password: ")
+    print(PEbot.login(username, password))
     print(PEbot.reserve_class(options.classname))

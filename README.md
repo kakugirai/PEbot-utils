@@ -50,6 +50,11 @@ finally
 ```
 pip install -r requirements.txt
 ```
+## Usage
+
+```
+python bot_cli.py -h
+```
 
 ## TODOs
 - [ ] Separate login process and library function (argparse)
