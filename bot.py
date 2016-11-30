@@ -2,9 +2,9 @@
 # encoding: utf-8
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
 
 URL = "https://wellness.sfc.keio.ac.jp/v3/pc.php"
 USERNAME_XPATH = "/html/body/div/div[2]/div/form/table/tbody/tr[1]/td/input"
@@ -17,46 +17,45 @@ CLASS_XPATH_B = "')]/following-sibling::td[4]/a"
 RESERVE_BUTTON_XPATH = "/html/body/div/div[3]/form/p/input[1]"
 
 class Bot(object):
-	"""the PEbot object"""
-	def __init__(self):
-		super(Bot, self).__init__()
-		self.browser = webdriver.Chrome()
+    """the PEbot object"""
+    def __init__(self):
+        super(Bot, self).__init__()
+        self.browser = webdriver.Chrome()
 
-	def login(self, username, password):
-		try:
-			self.browser.get(URL)
-			self.browser.find_element_by_xpath(USERNAME_XPATH).send_keys(username)
-			self.browser.find_element_by_xpath(PASSWORD_XPATH).send_keys(password)
-			self.browser.find_element_by_xpath(SUBMIT_XPATH).click()
-			return "Successfully logged in"
-		except Exception as e:
-			raise e
+    def login(self, username, password):
+        try:
+            self.browser.get(URL)
+            self.browser.find_element_by_xpath(USERNAME_XPATH).send_keys(username)
+            self.browser.find_element_by_xpath(PASSWORD_XPATH).send_keys(password)
+            self.browser.find_element_by_xpath(SUBMIT_XPATH).click()
+            return "Successfully logged in"
+        except Exception as e:
+            raise e
 
-	def show_available_class(self):
-		try:
-			# switch to reservation page
-			self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
-			# show all available class
-			self.browser.find_element_by_xpath(ALL_AVAILABLE_CLASS_XPATH).click()
-		except Exception as e:
-			raise e
-		finally:
-			# TODO: return table object
-			return
+    def show_available_class(self):
+        try:
+            # switch to reservation page
+            self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
+            # show all available class
+            self.browser.find_element_by_xpath(ALL_AVAILABLE_CLASS_XPATH).click()
+            # FIXME return table object
+            return
+        except Exception as e:
+            raise e
 
-	def reserve_class(self, desired_class):
-		try:
-			# switch to reservation page
-			self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
-			# show all available class
-			self.browser.find_element_by_xpath(ALL_AVAILABLE_CLASS_XPATH).click()
-			# Choose class
-			class_xpath = CLASS_XPATH_A + desired_class + CLASS_XPATH_B
-			self.browser.find_element_by_xpath(class_xpath).click()
-			# Reserve class
-			self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
-			# Click again
-			self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
-			return "You've successfully reserved " + desired_class + "."
-		except Exception as e:
-			raise e
+    def reserve_class(self, desired_class):
+        try:
+            # switch to reservation page
+            self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
+            # show all available class
+            self.browser.find_element_by_xpath(ALL_AVAILABLE_CLASS_XPATH).click()
+            # Choose class
+            class_xpath = CLASS_XPATH_A + desired_class + CLASS_XPATH_B
+            self.browser.find_element_by_xpath(class_xpath).click()
+            # Reserve class
+            self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
+            # Click again
+            self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
+            return "You've successfully reserved " + desired_class + "."
+        except Exception as e:
+            raise e
