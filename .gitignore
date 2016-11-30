@@ -1,2 +1,4 @@
-test.py
+.DS_Store
+test/
 __pycache__
+.ropeproject/

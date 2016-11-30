@@ -1,5 +1,15 @@
+import sys
 import argparse
 import bot
+
+if sys.platform == "linux" or sys.platform == "linux2":
+    from pyvirtualdisplay import Display
+    display = Display(visible=0, size=(800, 600))
+    display.start()
+elif sys.platform == "darwin":
+    pass
+elif sys.platform == "win32":
+    raise "I don't give a shit to Windows system."
 
 ##
 # TODO: add multi-users support
