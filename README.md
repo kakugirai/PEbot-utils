@@ -2,6 +2,8 @@
 Register PE class in God mode
 ## Installation
 ### macOS
+NOTED: macOS is just for testing
+
 install [Chrome](https://www.google.com/chrome/browser/desktop/index.html) and ChromeDriver
 
 ```
@@ -57,5 +59,6 @@ python bot_cli.py -h
 ```
 
 ## TODOs
-- [ ] Separate login process and library function (argparse)
-- [ ] Provide available courses list
+- [ ] Provide Python2 compatibility 
+- [ ] Optimize CLI by using [Click](http://click.pocoo.org/5/)
+- [x] Provide available courses list
