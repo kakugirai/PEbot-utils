@@ -2,8 +2,7 @@ import sys
 import datetime
 import click
 from getpass import getpass
-
-import bot
+import botcore
 
 
 if sys.platform == "linux":
@@ -24,7 +23,7 @@ def cli():
 @cli.command()
 @click.option('--classname', required=True)
 def reserve(classname):
-    PEbot = bot.Bot()
+    PEbot = botcore.Bot()
     PEbot.set_up()
     username = input("CNS ID:")
     password = getpass("CNS Password: ")
@@ -34,7 +33,7 @@ def reserve(classname):
 
 @cli.command()
 def show():
-    PEbot = bot.Bot()
+    PEbot = botcore.Bot()
     PEbot.set_up()
     print(PEbot.show_available_class())
     PEbot.tear_down()

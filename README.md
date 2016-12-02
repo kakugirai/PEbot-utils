@@ -13,7 +13,7 @@ brew install chromedriver
 then
 
 ```
-pip install -r requirements.txt
+pip install -e .
 ```
 ### Ubuntu
 install Chrome
@@ -50,15 +50,15 @@ sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 finally
 
 ```
-pip install -r requirements.txt
+pip install -e .
 ```
 ## Usage
 
 ```
-python bot_cli.py -h
+pecli.py --help
 ```
 
 ## TODOs
 - [ ] Provide Python2 compatibility 
-- [ ] Optimize CLI by using [Click](http://click.pocoo.org/5/)
+- [x] Optimize CLI by using [Click](http://click.pocoo.org/5/)
 - [x] Provide available courses list
