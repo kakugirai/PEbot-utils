@@ -1,7 +1,8 @@
 import sys
 import datetime
-import argparse
-import getpass
+import click
+from getpass import getpass
+
 import bot
 
 
@@ -15,22 +16,25 @@ elif sys.platform == "darwin":
 elif sys.platform == "win32":
     raise "I don't give a shit to Windows system."
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-a", "--available", dest="available",
-                    action='store_true',
-                    help="show available class")
-parser.add_argument("-r", "--reserve", dest="classname",
-                    help="enter name of desired class")
 
-options = parser.parse_args()
+@click.group()
+def cli():
+    pass
 
-PEbot = bot.Bot()
-if options.classname:
-    username = input("CNS ID: ")
-    password = getpass.getpass("CNS Password: ")
+@cli.command()
+@click.option('--classname', required=True)
+def reserve(classname):
+    PEbot = bot.Bot()
+    PEbot.set_up()
+    username = input("CNS ID:")
+    password = getpass("CNS Password: ")
     print(PEbot.login(username, password))
-    print(PEbot.reserve_class(options.classname))
+    print(PEbot.reserve_class(classname))
+    PEbot.tear_down()
 
-if options.available:
+@cli.command()
+def show():
+    PEbot = bot.Bot()
+    PEbot.set_up()
     print(PEbot.show_available_class())
-
+    PEbot.tear_down()

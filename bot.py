@@ -25,7 +25,13 @@ class Bot(object):
     ##
     def __init__(self):
         super(Bot, self).__init__()
+
+    def set_up(self):
         self.browser = webdriver.Chrome()
+
+    def tear_down(self):
+        """close webdriver"""
+        self.browser.quit()
 
     def login(self, username, password):
         """login"""
@@ -71,4 +77,5 @@ class Bot(object):
             return "You've successfully reserved " + desired_class + "."
         except Exception as err:
             raise err
+
 
