@@ -40,7 +40,8 @@ class Bot(object):
             self.browser.find_element_by_xpath(USERNAME_XPATH).send_keys(username)
             self.browser.find_element_by_xpath(PASSWORD_XPATH).send_keys(password)
             self.browser.find_element_by_xpath(SUBMIT_XPATH).click()
-            return "Successfully logged in."
+            print("Successfully logged in.")
+            return
         except Exception as err:
             raise err
 
@@ -56,7 +57,8 @@ class Bot(object):
             for row in rows[1:]:
                 cols = row.find_all("td")
                 class_list.append([cols[i].get_text() for i in range(3)])
-            return class_list
+            print(class_list)
+            return
         except Exception as err:
             raise err
 
@@ -74,7 +76,8 @@ class Bot(object):
             self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
             # Click again
             self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
-            return "You've successfully reserved " + desired_class + "."
+            print("You've successfully reserved %s class." % desired_class)
+            return
         except Exception as err:
             raise err
 

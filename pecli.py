@@ -18,22 +18,27 @@ elif sys.platform == "win32":
 
 @click.group()
 def cli():
+    """Register PE class, in God mode."""
     pass
 
 @cli.command()
-@click.option('--classname', required=True)
+@click.option('--classname', required=True,
+              help="enter the name of the class")
 def reserve(classname):
+    """Reserve class"""
     PEbot = botcore.Bot()
     PEbot.set_up()
     username = input("CNS ID:")
     password = getpass("CNS Password: ")
-    print(PEbot.login(username, password))
-    print(PEbot.reserve_class(classname))
+    PEbot.login(username, password)
+    PEbot.reserve_class(classname)
     PEbot.tear_down()
 
 @cli.command()
 def show():
+    """Show available class"""
     PEbot = botcore.Bot()
     PEbot.set_up()
-    print(PEbot.show_available_class())
+    PEbot.show_available_class()
     PEbot.tear_down()
+
