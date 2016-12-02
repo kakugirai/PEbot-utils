@@ -1,4 +1,5 @@
 import sys
+import datetime
 import argparse
 import getpass
 import bot
@@ -20,6 +21,7 @@ parser.add_argument("-a", "--available", dest="available",
                     help="show available class")
 parser.add_argument("-r", "--reserve", dest="classname",
                     help="enter name of desired class")
+
 options = parser.parse_args()
 
 PEbot = bot.Bot()
@@ -30,8 +32,5 @@ if options.classname:
     print(PEbot.reserve_class(options.classname))
 
 if options.available:
-    username = input("CNS ID: ")
-    password = getpass.getpass("CNS Password: ")
-    print(PEbot.login(username, password))
     print(PEbot.show_available_class())
 

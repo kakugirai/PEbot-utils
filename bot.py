@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-
 from selenium import webdriver
 from bs4 import BeautifulSoup
 # from selenium.webdriver.common.by import By
@@ -40,24 +39,18 @@ class Bot(object):
             raise err
 
     def show_available_class(self):
-        """generate a HTML table object to show available class"""
+        """generate an available class list"""
         try:
-            # check if the user logged in
-            # if self.browser.find_element_by_xpath(USERNAME_XPATH).size() > 0:
-            #     self.browser.find_element_by_xpath(OUTER_ALL_AVAILABLE_CLASSES_XPATH).click()
-            # else:
-            #     # switch to reservation page
-            self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
-            #     # show all available class
-            self.browser.find_element_by_xpath(INNER_ALL_AVAILABLE_CLASSES_XPATH).click()
+            self.browser.get(URL)
+            self.browser.find_element_by_xpath(OUTER_ALL_AVAILABLE_CLASSES_XPATH).click()
 
-            class_table = []
-            available_class_table = BeautifulSoup(self.browser.page_source, 'lxml').find(attrs={"class" : "cool"})
+            class_list = []
+            available_class_table = BeautifulSoup(self.browser.page_source, 'lxml').find("table", attrs={"class" : "cool"})
             rows = available_class_table.find_all('tr')
             for row in rows[1:]:
                 cols = row.find_all("td")
-                class_table.append([cols[0].get_text(), cols[1].get_text(), cols[2].get_text()])
-            return class_table
+                class_list.append([cols[i].get_text() for i in range(3)])
+            return class_list
         except Exception as err:
             raise err
 
@@ -67,7 +60,7 @@ class Bot(object):
             # switch to reservation page
             self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
             # show all available class
-            self.browser.find_element_by_xpath(ALL_AVAILABLE_CLASSES_XPATH).click()
+            self.browser.find_element_by_xpath(INNER_ALL_AVAILABLE_CLASSES_XPATH).click()
             # Choose class
             class_xpath = CLASS_XPATH_A + desired_class + CLASS_XPATH_B
             self.browser.find_element_by_xpath(class_xpath).click()
