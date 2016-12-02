@@ -62,7 +62,7 @@ class Bot(object):
         except Exception as err:
             raise err
 
-    def reserve_class(self, desired_class):
+    def reserve_class(self, date, period, classname):
         """reserve class"""
         try:
             # switch to reservation page
@@ -70,15 +70,14 @@ class Bot(object):
             # show all available class
             self.browser.find_element_by_xpath(INNER_ALL_AVAILABLE_CLASSES_XPATH).click()
             # Choose class
-            class_xpath = CLASS_XPATH_A + desired_class + CLASS_XPATH_B
+            class_xpath = '/html/body/div/div[3]/table[2]/tbody/tr[td[1]/text()[contains(., "{0}")] and td[2]/text()[contains(., "{1}")] and td[3]/text()[contains(., "{2}")]]/td[7]/a'.format(date, period, classname)
             self.browser.find_element_by_xpath(class_xpath).click()
             # Reserve class
             self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
             # Click again
             self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
-            print("You've successfully reserved %s class." % desired_class)
+            print("You've successfully reserved %s class." % classname)
             return
         except Exception as err:
             raise err
-
 

@@ -50,12 +50,13 @@ sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 finally
 
 ```
+cd PEbot
 pip install -e .
 ```
 ## Usage
 
 ```
-pecli.py --help
+pecli --help
 ```
 
 ## TODOs
