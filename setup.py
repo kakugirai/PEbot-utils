@@ -8,7 +8,8 @@ setup(
         "botcore",
     ],
     install_requires=[
-        "Click",
+        "click",
+        "pyvirtualdisplay",
         "selenium",
         "beautifulsoup4",
     ],
@@ -17,4 +18,3 @@ setup(
         pecli=pecli:cli
     ''',
 )
-

@@ -1,15 +1,17 @@
+"""PEbot command line interface"""
+
 import sys
-import datetime
-import click
+# import datetime
 from getpass import getpass
+import click
 import botcore
 
 
 if sys.platform == "linux" or sys.platform == "linux2":
     from pyvirtualdisplay import Display
     # seamless executable on Ubuntu
-    display = Display(visible=0, size=(800, 600))
-    display.start()
+    DISPLAY = Display(visible=0, size=(800, 600))
+    DISPLAY.start()
 elif sys.platform == "darwin":
     pass
 elif sys.platform == "win32":
@@ -30,19 +32,16 @@ def cli():
               help="enter the name of the class")
 def reserve(date, period, classname):
     """Reserve class"""
-    PEbot = botcore.Bot()
-    PEbot.set_up()
     username = input("CNS ID:")
     password = getpass("CNS Password: ")
-    PEbot.login(username, password)
-    PEbot.reserve_class(date, period, classname)
-    PEbot.tear_down()
+    bot = botcore.Bot()
+    bot.login(username, password)
+    bot.reserve_class(date, period, classname)
+    bot.tear_down()
 
 @cli.command()
 def show():
     """Show available class"""
-    PEbot = botcore.Bot()
-    PEbot.set_up()
-    PEbot.show_available_class()
-    PEbot.tear_down()
-
+    bot = botcore.Bot()
+    bot.show_available_class()
+    bot.tear_down()
