@@ -17,7 +17,7 @@ INNER_ALL_AVAILABLE_CLASSES_XPATH = "/html/body/div/div[3]/ul[1]/li/a"
 OUTER_ALL_AVAILABLE_CLASSES_XPATH = "/html/body/div/div[3]/ul[3]/li/a"
 CLASS_TABLE_XPATH = "/html/body/div/div[3]/table[2]"
 RESERVE_BUTTON_XPATH = "/html/body/div/div[3]/form/p/input[1]"
-CANCEL_BUTTON_XPATH ="/html/body/div/div[3]/form/p/input"
+CANCEL_BUTTON_XPATH = "/html/body/div/div[3]/form/p/input"
 
 class Bot(object):
     """PEbot object"""
@@ -57,7 +57,8 @@ class Bot(object):
         rows = available_class_table.find_all('tr')
         for row in rows[1:]:
             cols = row.find_all("td")
-            available_class_list.append([cols[i].get_text() for i in range(4)] + [cols[5].get_text()])
+            available_class_list.append(
+                [cols[i].get_text() for i in range(4)] + [cols[5].get_text()])
         return available_class_list
 
     def show_registered_class(self):

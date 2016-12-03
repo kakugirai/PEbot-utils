@@ -65,10 +65,12 @@ def show(all, registered):
     """Show available classes"""
     bot = botcore.Bot()
     if all:
-        print(tabulate(bot.show_available_class(), headers=['Date', 'Period', 'Class Name', 'Teacher', 'Available']))
+        print(tabulate(bot.show_available_class(), headers=[
+            'Date', 'Period', 'Class Name', 'Teacher', 'Available']))
     if registered:
         username = input("CNS ID:")
         password = getpass("CNS Password: ")
         bot.login(username, password)
-        print(tabulate(bot.show_registered_class(), headers=['Date', 'Period', 'Class Name', 'Teacher']))
+        print(tabulate(bot.show_registered_class(), headers=[
+            'Date', 'Period', 'Class Name', 'Teacher']))
     bot.tear_down()

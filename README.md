@@ -63,3 +63,5 @@ pecli --help
 - [ ] Provide Python2 compatibility 
 - [x] Optimize CLI by using [Click](http://click.pocoo.org/5/)
 - [x] Provide available courses list
+- [ ] Handle Exceptions
+- [ ] Simplify user input and add time zone support
