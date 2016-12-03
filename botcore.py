@@ -1,7 +1,11 @@
 """PEbot core module"""
 
+import time
 import random
 from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
 URL = "https://wellness.sfc.keio.ac.jp/v3/pc.php"
@@ -13,6 +17,7 @@ INNER_ALL_AVAILABLE_CLASSES_XPATH = "/html/body/div/div[3]/ul[1]/li/a"
 OUTER_ALL_AVAILABLE_CLASSES_XPATH = "/html/body/div/div[3]/ul[3]/li/a"
 CLASS_TABLE_XPATH = "/html/body/div/div[3]/table[2]"
 RESERVE_BUTTON_XPATH = "/html/body/div/div[3]/form/p/input[1]"
+CANCEL_BUTTON_XPATH ="/html/body/div/div[3]/form/p/input"
 
 class Bot(object):
     """PEbot object"""
@@ -31,14 +36,14 @@ class Bot(object):
     def login(self, username, password, delay=None):
         """login"""
         if delay is None:
-            delay = [0.5, 1.5]
+            delay = [1, 2]
         self.browser.get(URL)
         self.browser.find_element_by_xpath(USERNAME_XPATH).send_keys(username)
-        self.browser.implicitly_wait(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         self.browser.find_element_by_xpath(PASSWORD_XPATH).send_keys(password)
-        self.browser.implicitly_wait(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         self.browser.find_element_by_xpath(SUBMIT_XPATH).click()
-        self.browser.implicitly_wait(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         print("Successfully logged in.")
         return
 
@@ -69,13 +74,13 @@ class Bot(object):
     def register_class(self, date, period, classname, delay=None):
         """register class"""
         if delay is None:
-            delay = [0.5, 1.5]
+            delay = [1, 2]
         # switch to reservation page
         self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
-        self.browser.implicitly_wait(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         # get available class list
         self.browser.find_element_by_xpath(INNER_ALL_AVAILABLE_CLASSES_XPATH).click()
-        self.browser.implicitly_wait(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         # Choose class
         class_xpath = '''
         /html/body/div/div[3]/table[2]/tbody/tr[
@@ -84,11 +89,28 @@ class Bot(object):
         td[3]/text()[contains(., "{2}")]]/td[7]/a
         '''.format(date, period, classname)
         self.browser.find_element_by_xpath(class_xpath).click()
-        self.browser.implicitly_wait(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         # Register class
         self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
-        self.browser.implicitly_wait(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         # Click again
         self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
         print("You've successfully registered %s class." % classname)
+        return
+
+    def cancel_class(self, date, period, classname, delay=None):
+        """register class"""
+        if delay is None:
+            delay = [1, 2]
+
+        class_xpath = '''
+        /html/body/div/div[3]/form/table/tbody/tr[
+        td[1]/text()[contains(., "{0}")] and 
+        td[2]/text()[contains(., "{1}")] and 
+        td[3]/text()[contains(., "{2}")]]/td[9]/input
+        '''.format(date, period, classname)
+        self.browser.find_element_by_xpath(class_xpath).click()
+        time.sleep(random.uniform(delay[0], delay[1]))
+        self.browser.find_element_by_xpath(CANCEL_BUTTON_XPATH).click()
+        print("You've successfully cancelled %s class." % classname)
         return

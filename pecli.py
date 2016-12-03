@@ -29,7 +29,7 @@ def cli():
               help="the date of the class")
 @click.option('--period', '-p', required=True,
               help="the period of the class")
-@click.option('--classname', '-c', required=True,
+@click.option('--classname', '-n', required=True,
               help="the name of the class")
 def register(date, period, classname):
     """Register class"""
@@ -38,6 +38,22 @@ def register(date, period, classname):
     bot = botcore.Bot()
     bot.login(username, password)
     bot.register_class(date, period, classname)
+    bot.tear_down()
+
+@cli.command()
+@click.option('--date', '-d', required=True,
+              help="the date of the class")
+@click.option('--period', '-p', required=True,
+              help="the period of the class")
+@click.option('--classname', '-n', required=True,
+              help="the name of the class")
+def cancel(date, period, classname):
+    """Cancel class"""
+    username = input("CNS ID:")
+    password = getpass("CNS Password: ")
+    bot = botcore.Bot()
+    bot.login(username, password)
+    bot.cancel_class(date, period, classname)
     bot.tear_down()
 
 @cli.command()
