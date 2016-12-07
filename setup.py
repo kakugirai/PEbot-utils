@@ -12,6 +12,7 @@ setup(
         "pyvirtualdisplay",
         "selenium",
         "beautifulsoup4",
+        "tabulate",
     ],
     entry_points='''
         [console_scripts]
