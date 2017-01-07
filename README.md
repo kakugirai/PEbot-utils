@@ -1,5 +1,6 @@
 # PEbot
 Geeky way to register PE class in SFC
+<img src="tty.gif" alt="tty.gif">
 ## Installation
 ### macOS
 NOTED: by default you can only run Chrome headlessly on macOS
