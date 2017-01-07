@@ -96,7 +96,11 @@ class Bot(object):
         # time.sleep(random.uniform(delay[0], delay[1]))
         # Click again
         self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
-        print("You've successfully registered %s class." % classname)
+        error = self.browser.find_element_by_xpath("/html/body/div/div[3]/p[2]")
+        if "reserved" in error.text:
+            print("You've successfully registered %s class." % classname)
+        else:
+            print("Oops. The class was not registered.")
         return
 
     def cancel_class(self, date, period, classname, delay=None):
@@ -113,5 +117,9 @@ class Bot(object):
         self.browser.find_element_by_xpath(class_xpath).click()
         time.sleep(random.uniform(delay[0], delay[1]))
         self.browser.find_element_by_xpath(CANCEL_BUTTON_XPATH).click()
-        print("You've successfully cancelled %s class." % classname)
+        error = self.browser.find_element_by_xpath("/html/body/div/div[3]/p[1]")
+        if "canceled" in error.text:
+            print("You've successfully canceled %s class." % classname)
+        else:
+            print("Oops. The class was not canceled.")
         return
