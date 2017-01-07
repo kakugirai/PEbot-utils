@@ -111,7 +111,7 @@ class Bot(object):
         td[3]/text()[contains(., "{2}")]]/td[9]/input
         '''.format(date, period, classname)
         self.browser.find_element_by_xpath(class_xpath).click()
-        # time.sleep(random.uniform(delay[0], delay[1]))
+        time.sleep(random.uniform(delay[0], delay[1]))
         self.browser.find_element_by_xpath(CANCEL_BUTTON_XPATH).click()
         print("You've successfully cancelled %s class." % classname)
         return

@@ -47,7 +47,8 @@ def register():
         message='Please choose the class you want to register',
         choices=courses_name)])
     selected = course["course"].split("\t")
-    comfirm = inquirer.prompt([inquirer.Confirm('continue', message=("You selected " + selected[2] + " at " + selected[1] + " on " + selected[0] + " " + day["day"] + ". Register it?"))])
+    comfirm = inquirer.prompt([inquirer.Confirm('continue',
+        message=("You selected " + selected[2] + " at " + selected[1] + " on " + selected[0] + " " + day["day"] + ". Register it?"))])
     if comfirm:
         username = input("CNS ID: ")
         password = getpass("CNS Password: ")
@@ -56,19 +57,29 @@ def register():
     bot.tear_down()
 
 @cli.command()
-@click.option('--date', '-d', required=True,
-              help="the date of the class")
-@click.option('--period', '-p', required=True,
-              help="the period of the class")
-@click.option('--classname', '-n', required=True,
-              help="the name of the class")
-def cancel(date, period, classname):
+# @click.option('--date', '-d', required=True,
+#               help="the date of the class")
+# @click.option('--period', '-p', required=True,
+#               help="the period of the class")
+# @click.option('--classname', '-n', required=True,
+#               help="the name of the class")
+def cancel():
+    # date, period, classname
     """Cancel class"""
     username = input("CNS ID:")
     password = getpass("CNS Password: ")
     bot = botcore.Bot()
     bot.login(username, password)
-    bot.cancel_class(date, period, classname)
+    registered_class = bot.show_registered_class()
+    courses_name = [(course[0] + "\tPeriod " + course[1] + "\t" + course[2]) for course in registered_class]
+    course_to_cancel = inquirer.prompt([inquirer.List('course',
+        message='Please choose the class you want to cancel',
+        choices=courses_name)])
+    selected = course_to_cancel["course"].split("\t")
+    comfirm = inquirer.prompt([inquirer.Confirm('continue',
+        message=("You selected " + selected[2] + " at " + selected[1] + " on " + selected[0] + ". Cancel it?"))])
+    if comfirm:
+        bot.cancel_class(selected[0], selected[1][-1], selected[2])
     bot.tear_down()
 
 @cli.command()
