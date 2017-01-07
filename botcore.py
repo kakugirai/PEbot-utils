@@ -39,11 +39,11 @@ class Bot(object):
             delay = [1, 2]
         self.browser.get(URL)
         self.browser.find_element_by_xpath(USERNAME_XPATH).send_keys(username)
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         self.browser.find_element_by_xpath(PASSWORD_XPATH).send_keys(password)
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         self.browser.find_element_by_xpath(SUBMIT_XPATH).click()
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         print("Successfully logged in.")
         return
 
@@ -78,10 +78,10 @@ class Bot(object):
             delay = [1, 2]
         # switch to reservation page
         self.browser.find_element_by_xpath(RESERVATION_BAR_XPATH).click()
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         # get available class list
         self.browser.find_element_by_xpath(INNER_ALL_AVAILABLE_CLASSES_XPATH).click()
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         # Choose class
         class_xpath = '''
         /html/body/div/div[3]/table[2]/tbody/tr[
@@ -90,10 +90,10 @@ class Bot(object):
         td[3]/text()[contains(., "{2}")]]/td[7]/a
         '''.format(date, period, classname)
         self.browser.find_element_by_xpath(class_xpath).click()
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         # Register class
         self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         # Click again
         self.browser.find_element_by_xpath(RESERVE_BUTTON_XPATH).click()
         print("You've successfully registered %s class." % classname)
@@ -111,7 +111,7 @@ class Bot(object):
         td[3]/text()[contains(., "{2}")]]/td[9]/input
         '''.format(date, period, classname)
         self.browser.find_element_by_xpath(class_xpath).click()
-        time.sleep(random.uniform(delay[0], delay[1]))
+        # time.sleep(random.uniform(delay[0], delay[1]))
         self.browser.find_element_by_xpath(CANCEL_BUTTON_XPATH).click()
         print("You've successfully cancelled %s class." % classname)
         return

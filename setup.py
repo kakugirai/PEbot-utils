@@ -9,6 +9,7 @@ setup(
     ],
     install_requires=[
         "click",
+        "inquirer",
         "pyvirtualdisplay",
         "selenium",
         "beautifulsoup4",
