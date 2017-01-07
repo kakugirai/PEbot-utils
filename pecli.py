@@ -38,17 +38,21 @@ def register():
     bot = botcore.Bot()
     available_class = bot.show_available_class()
     days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    day = inquirer.prompt([inquirer.List('day', message='Please choose the day of the week', choices=days)])
+    day = inquirer.prompt([inquirer.List('day',
+        message='Please choose the day of the week',
+        choices=days)])
     courses = [course for course in available_class if day["day"] in course[0]]
     courses_name = [(course[0][:5] + "\tPeriod " + course[1] + "\t" + course[2]) for course in courses]
-    course = inquirer.prompt([inquirer.List('course', message='Please choose the class you want to register', choices=courses_name)])
+    course = inquirer.prompt([inquirer.List('course',
+        message='Please choose the class you want to register',
+        choices=courses_name)])
     selected = course["course"].split("\t")
     comfirm = inquirer.prompt([inquirer.Confirm('continue', message=("You selected " + selected[2] + " at " + selected[1] + " on " + selected[0] + " " + day["day"] + ". Register it?"))])
     if comfirm:
         username = input("CNS ID: ")
         password = getpass("CNS Password: ")
         bot.login(username, password)
-        bot.register_class((selected[0] + " " + day["day"]), selected[1][-1], selected[2])
+        bot.register_class((selected[0] + " (" + day["day"] + ")"), selected[1][-1], selected[2])
     bot.tear_down()
 
 @cli.command()

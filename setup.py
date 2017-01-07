@@ -11,6 +11,7 @@ setup(
         "click",
         "inquirer",
         "pyvirtualdisplay",
+        "lxml",
         "selenium",
         "beautifulsoup4",
         "tabulate",

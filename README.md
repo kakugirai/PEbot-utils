@@ -1,8 +1,8 @@
 # PEbot
-Register PE class in God mode
+Geeky way to register PE class in SFC
 ## Installation
 ### macOS
-NOTED: macOS is just for testing
+NOTED: by default you can only run Chrome headlessly on macOS
 
 install [Chrome](https://www.google.com/chrome/browser/desktop/index.html) and ChromeDriver
 
@@ -13,7 +13,7 @@ brew install chromedriver
 then
 
 ```
-pip install -e .
+pip3 install -e .
 ```
 ### Ubuntu
 install Chrome
@@ -39,7 +39,7 @@ unzip chromedriver_linux64.zip
 chmod +x chromedriver
 ```
 
-add ```chromedriver``` to $PATH
+add `chromedriver` to `$PATH`
 
 ```
 sudo mv -f chromedriver /usr/local/share/chromedriver
@@ -50,8 +50,7 @@ sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 finally
 
 ```
-cd PEbot
-pip install -e .
+pip3 install -e .
 ```
 ## Usage
 
@@ -64,4 +63,3 @@ pecli --help
 - [x] Optimize CLI by using [Click](http://click.pocoo.org/5/)
 - [x] Provide available courses list
 - [ ] Handle Exceptions
-- [ ] Simplify user input and add time zone support
