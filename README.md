@@ -1,7 +1,7 @@
 # PEbot
 Geeky way to register PE class in SFC
 
-<img src="tty.gif" alt="tty.gif">
+<img src="register.gif" alt="register">
 
 ## Installation
 ### macOS
@@ -66,3 +66,4 @@ pecli --help
 - [x] Optimize CLI by using [Click](http://click.pocoo.org/5/)
 - [x] Provide available courses list
 - [ ] Handle Exceptions
+- [ ] Upload Alpha release to pypi
