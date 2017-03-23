@@ -16,7 +16,7 @@ brew install chromedriver
 then
 
 ```
-pip3 install -e .
+python3 setup.py install
 ```
 ### Ubuntu
 install Chrome
@@ -53,7 +53,7 @@ sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 finally
 
 ```
-pip3 install -e .
+python3 setup.py install
 ```
 ## Usage
 
